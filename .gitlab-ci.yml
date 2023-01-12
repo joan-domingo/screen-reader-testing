@@ -14,5 +14,12 @@ unit test:
   stage: test
   script:
     - npm install --progress=false
-    - npm run unit
+    - npm run test:unit
+
+e2e test:
+  image: node:16
+  stage: test
+  script:
+    - npx playwright install
+    - npm run test:e2e
 
