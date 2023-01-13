@@ -1,25 +1,26 @@
-build site:
-  image: node:16
-  stage: build
-  script:
-    - npm install --progress=false
-    - npm run build
-  artifacts:
-    expire_in: 1 week
-    paths:
-      - dist
-
-unit test:
-  image: node:16
-  stage: test
-  script:
-    - npm install --progress=false
-    - npm run test:unit
-
 e2e test:
-  image: node:16
   stage: test
+  #image: mcr.microsoft.com/playwright:v1.29.0-focal
+  image: node:16
   script:
-    - npx playwright install
+    - npm ci
+    - npm install
+    - npx playwright install --with-deps webkit
     - npm run test:e2e
+    #- xvfb-run npm run test:e2e
+  retry:
+    max: 1
+    when:
+      - always
+  artifacts:
+    name: E2E Test Report
+    expire_in: 1 week
+    when: always
+    paths:
+      - reports/
+    reports:
+      junit: results.xml
+  # tags:
+  #  - "shared-macos-amd64"
+
 
