@@ -5,7 +5,7 @@ e2e test:
   script:
     - npm ci
     - npm install
-    - npx playwright install --with-deps webkit
+    - npx playwright install --with-deps
     - npm run test:e2e
     #- xvfb-run npm run test:e2e
   retry:

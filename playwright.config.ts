@@ -1,5 +1,5 @@
 // playwright.config.ts
-import { PlaywrightTestConfig, devices } from '@playwright/test';
+import { PlaywrightTestConfig, devices } from "@playwright/test";
 
 const config: PlaywrightTestConfig = {
   // Forbid test.only on CI
@@ -16,27 +16,35 @@ const config: PlaywrightTestConfig = {
 
   // Configure browser and context here
   use: {
-    baseURL: process.env.CI_ENVIRONMENT_URL || 'http://localhost:5173',
-    screenshot: 'only-on-failure',
-    trace: 'retain-on-failure',
-    video: 'retain-on-failure',
+    baseURL: process.env.CI_ENVIRONMENT_URL || "http://localhost:5173",
+    screenshot: "only-on-failure",
+    trace: "retain-on-failure",
+    video: "retain-on-failure",
   },
   projects: [
     {
+      name: "chromium",
+      use: {
+        ...devices["Desktop Chrome"],
+        headless: false,
+        video: "off",
+      },
+    },
+    /*{
       name: "webkit",
       use: { ...devices["Desktop Safari"], headless: false, video: "off" },
-    },
+    },*/
   ],
-  outputDir: 'reports/e2e/output',
+  outputDir: "reports/e2e/output",
   reporter: [
-    ['list'],
-    ['html', { outputFolder: 'reports/e2e/html' }],
-    ['json', { outputFile: 'reports/e2e/results.json' }],
+    ["list"],
+    ["html", { outputFolder: "reports/e2e/html" }],
+    ["json", { outputFile: "reports/e2e/results.json" }],
     [
-      'junit',
+      "junit",
       {
         embedAnnotationsAsProperties: true,
-        outputFile: 'results.xml'
+        outputFile: "results.xml",
       },
     ],
   ],
@@ -45,7 +53,7 @@ const config: PlaywrightTestConfig = {
       threshold: 0.5,
     },
   },
-  testDir: 'e2e',
+  testDir: "e2e",
   /* Run your local dev server before starting the tests */
   webServer: {
     /**
@@ -53,9 +61,9 @@ const config: PlaywrightTestConfig = {
      * Use the preview server on CI for more realistic testing.
      Playwright will re-use the local server if there is already a dev-server running.
      */
-    command: process.env.CI ? 'vite preview --port 5173' : 'vite dev',
+    command: process.env.CI ? "vite preview --port 5173" : "vite dev",
     port: 5173,
-    reuseExistingServer: !process.env.CI
-  }
+    reuseExistingServer: !process.env.CI,
+  },
 };
 export default config;
