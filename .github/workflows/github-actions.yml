@@ -10,6 +10,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
+      - uses: guidepup/setup-action
       - run: npm ci
       - run: npm install
       - run: npx playwright install --with-deps
