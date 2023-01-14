@@ -17,9 +17,9 @@ const config: PlaywrightTestConfig = {
   // Configure browser and context here
   use: {
     baseURL: process.env.CI_ENVIRONMENT_URL || "http://localhost:5173",
-    screenshot: "only-on-failure",
-    trace: "retain-on-failure",
-    video: "retain-on-failure",
+    // screenshot: "only-on-failure",
+    // trace: "retain-on-failure",
+    // video: "retain-on-failure",
   },
   projects: [
     /*{
@@ -32,7 +32,7 @@ const config: PlaywrightTestConfig = {
     },*/
     {
       name: "webkit",
-      use: { ...devices["Desktop Safari"], headless: false, video: "off" },
+      use: { ...devices["Desktop Safari"], headless: false, video: "on" },
     },
   ],
   outputDir: "reports/e2e/output",
