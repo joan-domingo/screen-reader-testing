@@ -6,11 +6,10 @@ jobs:
     runs-on: macos-latest
     # runs-on: ubuntu-latest
     steps:
-    steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: "16
+          node-version: 16
       - name: Enable VoiceOver Automation
         uses: guidepup/setup-action@0.6.4
       - name: Is CI
