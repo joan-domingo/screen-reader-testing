@@ -22,18 +22,18 @@ const config: PlaywrightTestConfig = {
     video: "retain-on-failure",
   },
   projects: [
-    {
+    /*{
       name: "chromium",
       use: {
         ...devices["Desktop Chrome"],
         headless: false,
         video: "off",
       },
-    },
-    /*{
+    },*/
+    {
       name: "webkit",
       use: { ...devices["Desktop Safari"], headless: false, video: "off" },
-    },*/
+    },
   ],
   outputDir: "reports/e2e/output",
   reporter: [
