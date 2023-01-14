@@ -3,15 +3,15 @@ run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
 jobs:
   Explore-GitHub-Actions:
-    # runs-on: macos-latest
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
+    # runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - name: Setup Environment
-        uses: guidepup/setup-action
+      - name: Guidepup Setup
+        uses: guidepup/setup-action@0.6.4
       - run: npm ci
       - run: npm install
       - run: npx playwright install --with-deps
