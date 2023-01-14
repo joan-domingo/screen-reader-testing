@@ -12,12 +12,10 @@ jobs:
           node-version: 16
       - name: Enable VoiceOver Automation
         uses: guidepup/setup-action@0.6.4
-      - name: Is CI
-        run: npm ci
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       - name: Install Playwright Browsers
-        run: npx playwright install chromium
+        run: npx playwright install --with-deps
       - name: Check status of VoiceOver
         run: test -f "/private/var/db/Accessibility/.VoiceOverAppleScriptEnabled" && echo "VoiceOver AppleScript Control Enabled"
       - name: Run Playwright tests
