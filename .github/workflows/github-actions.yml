@@ -6,14 +6,26 @@ jobs:
     runs-on: macos-latest
     # runs-on: ubuntu-latest
     steps:
+    steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 16
-      - name: Guidepup Setup
+          node-version: "16
+      - name: Enable VoiceOver Automation
         uses: guidepup/setup-action@0.6.4
-      - run: npm ci
-      - run: npm install
-      - run: npx playwright install --with-deps
-      # - run: xvfb-run npm run test:e2e
-      - run: npm run test:e2e
+      - name: Is CI
+        run: npm ci
+      - name: Install dependencies
+        run: npm install
+      - name: Install Playwright Browsers
+        run: npx playwright install chromium
+      - name: Check status of VoiceOver
+        run: test -f "/private/var/db/Accessibility/.VoiceOverAppleScriptEnabled" && echo "VoiceOver AppleScript Control Enabled"
+      - name: Run Playwright tests
+        run: npm run test:e2e
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
