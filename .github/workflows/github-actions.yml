@@ -3,18 +3,19 @@ run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
 jobs:
   test:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [macos-11, macos-12]
+  runs-on: macos-latest
+    # runs-on: ${{ matrix.os }}
+    # strategy:
+    #  matrix:
+    #    os: [macos-11, macos-12]
     # runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - name: Enable VoiceOver Automation
-        uses: guidepup/setup-action@0.5.0
+      - name: Guidepup Setup
+        uses: guidepup/setup-action@0.6.4
       - name: Install dependencies
         run: npm ci
       - name: Install Playwright Browsers
