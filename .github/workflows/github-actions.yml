@@ -19,7 +19,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+        run: npx playwright install --with-deps webkit
       - name: Check status of VoiceOver
         run: test -f "/private/var/db/Accessibility/.VoiceOverAppleScriptEnabled" && echo "VoiceOver AppleScript Control Enabled"
       - name: Run Playwright tests
