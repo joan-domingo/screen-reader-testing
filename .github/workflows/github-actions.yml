@@ -6,14 +6,16 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [macos-12, macos-13, macos-latest]
+        os: [macos-12, macos-latest]
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: 16
+      - name: Screenshot
+        run: mkdir recordings && screencapture ./recordings/test.jpg
       - name: Guidepup Setup
-        run: npx @guidepup/setup@0.6.3 --ci --record
+        run: npx @guidepup/setup@0.6.4 --ci --record
       - name: Install dependencies
         run: npm ci
       - name: Install Playwright Browsers
